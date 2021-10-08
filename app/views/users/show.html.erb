@@ -1,0 +1,24 @@
+<h2><%=user.name%> のマイページ</h2>  
+
+<div class="user_icon">
+      <% if @user.icon? %>
+        <%= image_tag @user.icon.url, size: "150x150" %>
+      <% else %>
+        <%= image_tag ("default_user.png") %> default画像準備必要
+      <% end %>
+    </div>
+    
+    <div class="user_edit">
+      <%= link_to 'ユーザー編集', edit_user_registration_path ,class:"btn btn-default btn-xs" %>
+    </div>
+<% @users.each do |user| %>
+    <%= user.name %>
+    <%= user.email %>
+    <%= user.like_hack %>
+
+  <% if current_user.admin?%>
+  <h3><%= link_to '管理者画面へ移動' , rails_admin_path %></h3>
+  <% end %>
+
+<h3><%= link_to 'アカウント情報の変更' , edit_user_path %></h3>
+<% end %>
